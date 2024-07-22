@@ -1,0 +1,92 @@
+﻿<Window x:Class="server.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:server" xmlns:viewmodels="clr-namespace:server.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ServerViewModel}"
+        mc:Ignorable="d"
+        Title="Server" MinHeight="450" MinWidth="800">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left">
+
+            <Label Content="Ip:"   Height="Auto" Width="90" Background="WhiteSmoke"/>
+            <TextBox Text="{Binding Ip, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding BooleanBehaviour.IpEnability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  Width="100" Height="Auto"/>
+            <Label Content="Port"  Height="Auto" Width="90" Background="WhiteSmoke"/>
+            <TextBox Text="{Binding Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding BooleanBehaviour.PortEnability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  Width="100" Height="Auto"/>
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right">
+            <Button Command="{Binding Connect}" IsEnabled="{Binding BooleanBehaviour.ConnectEnability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Connect"  Height="Auto" Width="100"/>
+            <Button Command="{Binding Disconnect}" Content="Disconnect" IsEnabled="{Binding BooleanBehaviour.DisconnectEnability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Height="Auto" Width="100"/>
+
+
+        </StackPanel>
+        <TextBox IsReadOnly="True" Text="{Binding DataFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" />
+        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+
+
+
+            <Button  Command="{Binding GetXML}" IsEnabled="{Binding BooleanBehaviour.OpenXMLEnability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Choose XML file" Width="100"  />
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label Content="FormatVersion" HorizontalAlignment="Left" Width="100" Background="WhiteSmoke"/>
+            <Label Content="Id" HorizontalAlignment="Left" Width="100" Background="WhiteSmoke"/>
+            <Label Content="To" HorizontalAlignment="Left" Width="100" Background="WhiteSmoke"/>
+            <Label Content="From" HorizontalAlignment="Left"   Width="100" Background="WhiteSmoke"/>
+
+            <Label Content="Color" HorizontalAlignment="Left" Width="100" Background="WhiteSmoke"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <TextBox Text="{Binding File.FormatVersion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Width="100"/>
+
+
+            <TextBox Text="{Binding File.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Width="100"/>
+            <TextBox Text="{Binding File.To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Width="100"/>
+
+
+
+            <TextBox Text="{Binding File.From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Width="100"/>
+
+
+            <TextBox Text="{Binding File.Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Width="100"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left">
+            <Label Content="Connected client information:"   Height="Auto" Width="200" Background="WhiteSmoke"/>
+            <Label Content="Ip:"   Height="Auto" Width="90" Background="WhiteSmoke"/>
+            <TextBox IsReadOnly="True" Text="{Binding ConnectedUser.ClientIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  Width="100" Height="Auto"/>
+            <Label Content="Port"  Height="Auto" Width="90" Background="WhiteSmoke"/>
+            <TextBox IsReadOnly="True" Text="{Binding ConnectedUser.ClientPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  Width="100" Height="Auto"/>
+
+        </StackPanel>
+        
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition >
+                <ColumnDefinition Width="*"></ColumnDefinition >
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding File.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Visible" IsReadOnly="True" TextWrapping="Wrap"  Foreground="{Binding File.Color}"/>
+        
+
+
+        <Image Grid.Column="0"  Source="{Binding BitImage}"  Stretch="UniformToFill" />
+
+        </Grid>
+
+
+    </Grid>
+
+</Window>
